@@ -601,6 +601,7 @@ function vHome(){
     '<button id="q-trace"><span class="ic">✍️</span><b>手写描红</b><span>四线三格，手指跟着写</span></button>'+
     '<button id="q-quiz"><span class="ic">🏁</span><b>小测验</b><span>10 道选择题，看掌握度</span></button>'+
     '<button id="q-follow"><span class="ic">🎤</span><b>跟读</b><span>听示范，读一遍打星</span></button>'+
+    '<button id="q-math"><span class="ic">🧮</span><b>口算</b><span>两位数乘一位数</span></button>'+
   '</div>'+
   (due===0 && nl===0 ? '<div class="empty"><span class="big-emoji">🎉</span>今天的任务都完成啦！<br>想加练可以直接点上面的玩法。</div>' : '');
   return {html:html, mount:function(){
@@ -609,6 +610,7 @@ function vHome(){
     $('#q-dict').onclick=function(){ startDict(10); };
     $('#q-trace').onclick=function(){ startTrace(); };
     $('#q-quiz').onclick=function(){ startQuiz(); };
+    $('#q-math').onclick=function(){ location.href='math/index.html'; };
     $('#q-follow').onclick=startFollowNext;
     if($('#q-wrong')) $('#q-wrong').onclick=startWrong;
   }};

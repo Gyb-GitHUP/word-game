@@ -505,7 +505,6 @@ function speak(text,slow){
   u.pitch=1;
   var v=pickVoice(); if(v){ u.voice=v; u.lang=v.lang; }
   window.speechSynthesis.speak(u);
-  if(!enVoices().length){ toast('未检测到英文语音包，发音可能不准'); }
 }
 /* 提示音 */
 var AC=null;
@@ -1486,6 +1485,9 @@ function vMe(){
       }).join(''):'<option>未检测到英文语音</option>')+'</select></div>'+
     '<div class="row" style="margin-top:8px"><button class="btn ghost" id="testVoice" style="flex:1">🔊 试听</button>'+
       '<label class="chip '+(S.settings.autoSpeak?'on':'')+'" style="flex:1;justify-content:center"><input type="checkbox" id="auto" '+(S.settings.autoSpeak?'checked':'')+' style="margin-right:6px">自动读音</label></div>'+
+    (vs.length?'':'<div class="small muted" style="margin-top:10px;line-height:1.7;color:#b45309">'+
+      '本机没有读到英文语音包，示范音可能读不准。安卓可在「设置 → 系统 → 语言和输入法 → 文字转语音 → 安装语音数据」里装英语；'+
+      '装完回到这里点「试听」。</div>')+
     '<div class="small muted" style="margin-top:10px;line-height:1.6">发音由手机自带语音合成完成，不需要联网。若声音不对，换一个语音或改用 Chrome / Safari 打开。</div>'+
   '</div>'+
 

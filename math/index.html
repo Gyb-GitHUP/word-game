@@ -272,7 +272,12 @@ function vQuiz(){
       if(Q.locked) return;
       if(k==="del"){ Q.buf=Q.buf.slice(0,-1); }
       else if(k==="ok"){ submit(); return; }
-      else if(Q.buf.length<4){ if(!(Q.buf===""&&k==="0")) Q.buf+=k; }
+      else if(k==="0"){
+        if(Q.buf==="") Q.buf="0";
+        else if(Q.buf!=="0" && Q.buf.length<4) Q.buf+="0";
+      }
+      else if(Q.buf==="0"){ Q.buf=k; }
+      else if(Q.buf.length<4){ Q.buf+=k; }
       $("#ans").textContent=Q.buf||"?";
       $("#ans").className="ans "+(Q.buf?"":"empty");
     };

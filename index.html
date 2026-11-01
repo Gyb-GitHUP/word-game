@@ -653,8 +653,9 @@ function vCard(){
     '<button class="btn ok" data-q="2">😀 记住了</button>'+
   '</div>'+
   '<div style="margin-top:12px;display:flex;gap:8px">'+
-    '<button class="btn ghost block" id="reveal" style="'+(sess.flip?'display:none':'')+'">看中文</button>'+
-    '<button class="btn ghost block" id="skip">跳过</button>'+
+    '<button class="btn ghost" id="prev" style="flex:0 0 92px" '+(sess.i>0?'':'disabled')+'>← 上一个</button>'+
+    '<button class="btn ghost" id="reveal" style="flex:1;'+(sess.flip?'display:none':'')+'">看中文</button>'+
+    '<button class="btn ghost" id="skip" style="flex:0 0 76px">跳过</button>'+
   '</div>';
 
   return {html:html, mount:function(){
@@ -666,12 +667,17 @@ function vCard(){
       $('#rate').style.display='grid'; $('#reveal').style.display='none';
     };
     $('#reveal').onclick=function(){ $('#flash').click(); };
+    $('#prev').onclick=function(){ if(sess.i>0){ sess.i--; sess.flip=false; go('card'); } };
     $('#skip').onclick=function(){ sess.i++; go('card'); };
     if($('#goFollow')) $('#goFollow').onclick=function(e){ e.stopPropagation(); startFollow(it); };
     document.querySelectorAll('#rate .btn').forEach(function(b){
       b.onclick=function(){
         var q=parseInt(b.getAttribute('data-q'),10);
         rateWord(it.w,q); markToday(q>0);
+        sess.rated=sess.rated||{};
+        var old=sess.rated[sess.i];
+        if(old!==undefined){ if(old===0) sess.wrong--; else sess.right--; }
+        sess.rated[sess.i]=q;
         if(q===0) sess.wrong++; else sess.right++;
         sess.i++; sess.flip=false;
         go('card');
@@ -718,7 +724,10 @@ function vDict(){
       '<button class="btn primary" id="checkBtn" style="flex:2">检查</button>'+
     '</div>'+
     '<div class="feedback" id="fb"></div>'+
-    '<div style="margin-top:10px"><button class="btn ok block" id="next" style="display:none">下一题 →</button></div>'+
+    '<div style="margin-top:10px;display:flex;gap:8px">'+
+      '<button class="btn ghost" id="prev" style="flex:1" '+(dict.i>0?'':'disabled')+'>← 上一个</button>'+
+      '<button class="btn ok" id="next" style="flex:2;display:none">下一题 →</button>'+
+    '</div>'+
   '</div>'+
   '<div class="small muted center" style="margin-top:12px">答错的词会自动进入错词复习</div>';
   return {html:html, mount:function(){
@@ -743,7 +752,9 @@ function vDict(){
       if(ok){
         fb.className='feedback show good';
         fb.innerHTML='✅ 完全正确！<br><b>'+esc(it.w)+'</b>'+(it.ipa?'<span class="ipa-inline">'+esc(it.ipa)+'</span>':'')+' · '+esc(it.cn);
-        dict.right++; rateWord(it.w,2); markToday(true); beep(true); speak(it.w);
+        dict.counted=dict.counted||{};
+        if(!dict.counted[dict.i]){ dict.counted[dict.i]=true; dict.right++; }
+        rateWord(it.w,2); markToday(true); beep(true); speak(it.w);
       }else{
         fb.className='feedback show bad';
         fb.innerHTML='❌ 差一点，正确拼写是<br><b>'+esc(it.w)+'</b>'+(it.ipa?'<span class="ipa-inline">'+esc(it.ipa)+'</span>':'')+' · '+esc(it.cn);
@@ -754,6 +765,7 @@ function vDict(){
     $('#checkBtn').onclick=check;
     inp.addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); check(); } });
     inp.addEventListener('input',function(){ if(inp.classList.contains('right')||inp.classList.contains('wrong')){ inp.className=''; } });
+    $('#prev').onclick=function(){ if(dict.i>0){ dict.i--; dict.checked=false; go('dictation'); } };
     $('#next').onclick=function(){ dict.i++; dict.checked=false; go('dictation'); };
   }};
 }
@@ -901,7 +913,8 @@ function vQuiz(){
   '<div class="progress-line"><span class="small muted">'+(quiz.i+1)+' / '+n+'</span><div class="bar"><i style="width:'+Math.round(quiz.i/n*100)+'%"></i></div></div>'+
   '<div class="card" style="margin-bottom:14px"><div class="center" style="font-size:24px;font-weight:800;padding:8px 0">'+esc(q.it.cn)+'</div></div>'+
   q.opts.map(function(o,k){ return '<button class="opt" data-k="'+k+'"><span class="ol">'+'ABCD'[k]+'</span>'+esc(o.w)+'</button>'; }).join('')+
-  '<div class="small muted center" style="margin-top:6px">选完自动进入下一题</div>';
+  '<div class="small muted center" style="margin-top:6px">选完自动进入下一题</div>'+
+  '<div style="margin-top:12px"><button class="btn ghost block" id="prevQ" '+(quiz.i>0?'':'disabled')+'>← 上一个</button></div>';
   return {html:html, mount:function(){
     var btns=document.querySelectorAll('.opt');
     btns.forEach(function(b){
@@ -910,11 +923,12 @@ function vQuiz(){
         var k=parseInt(b.getAttribute('data-k'),10), ok=q.opts[k].w===q.it.w;
         btns.forEach(function(x,idx){ x.disabled=true; if(q.opts[idx].w===q.it.w) x.classList.add('right'); });
         if(!ok){ b.classList.add('wrong'); rateWord(q.it.w,0); markToday(false); beep(false); }
-        else { quiz.right++; rateWord(q.it.w,1); markToday(true); beep(true); }
+        else { quiz.counted=quiz.counted||{}; if(!quiz.counted[quiz.i]){ quiz.counted[quiz.i]=true; quiz.right++; } rateWord(q.it.w,1); markToday(true); beep(true); }
         speak(q.it.w);
         setTimeout(function(){ quiz.i++; quiz.locked=false; go('quiz'); }, ok?850:1600);
       };
     });
+    if($('#prevQ')) $('#prevQ').onclick=function(){ if(quiz.i>0){ quiz.i--; quiz.locked=false; go('quiz'); } };
   }};
 }
 function finishQuiz(){
@@ -1091,14 +1105,22 @@ function followCleanup(){
   if(FOLLOW.raf){ cancelAnimationFrame(FOLLOW.raf); FOLLOW.raf=0; }
 }
 
-function startFollow(it){
+function startFollow(it, noPush){
   if(!it){ toast('先选一个单词'); return; }
+  FOLLOW.stack=FOLLOW.stack||[];
+  if(!noPush){ FOLLOW.stack.push(it); if(FOLLOW.stack.length>50) FOLLOW.stack=FOLLOW.stack.slice(-50); }
   followCleanup();
   var k=kOf(it.w), hist=(S.say||{})[k]||{};
   followS={it:it, phase:'ready', verdict:null, heard:'', url:'', recMs:0, refMs:0, peak:0, quiet:false,
            err:'', asrNote:'', selfStars:0, best:hist.best||0,
            asrOK:!!(window.SpeechRecognition||window.webkitSpeechRecognition)};
   go('follow');
+}
+function followPrev(){
+  var st=FOLLOW.stack||[];
+  if(st.length<2){ toast('已经是第一个词了'); return; }
+  st.pop();
+  startFollow(st[st.length-1], true);
 }
 function startFollowNext(){
   var q=buildQueue(20);
@@ -1370,6 +1392,7 @@ function vFollow(){
       '<button class="btn ghost" id="playRef2" style="flex:1">▶ 听示范</button>'+
     '</div>'+
     '<div class="row" style="margin-top:8px">'+
+      '<button class="btn ghost" id="prevw" style="flex:0 0 96px">← 上一个</button>'+
       '<button class="btn" id="again" style="flex:1">🔁 再读一次</button>'+
       '<button class="btn primary" id="nextw" style="flex:1">下一个词 →</button>'+
     '</div>';
@@ -1382,7 +1405,8 @@ function vFollow(){
     '<div class="small muted center" style="margin-top:10px;line-height:1.7">'+
       (followS.asrOK?'读完自动识别并打星（1—5 星）。':'这个浏览器不支持自动识别，录音后自己打星。')+
       '<br>录音只在本机内存里，关掉页面就没了。'+
-    '</div>';
+    '</div>'+
+    '<div style="margin-top:10px"><button class="btn ghost block" id="prevw">← 上一个词</button></div>';
   }
 
   return {html:html, mount:function(){
@@ -1393,6 +1417,7 @@ function vFollow(){
     if($('#playRef2')) $('#playRef2').onclick=ref;
     if($('#mic')) $('#mic').onclick=function(){ if(followS.phase==='rec') followStopRec(); else followStartRec(); };
     if($('#playMine')) $('#playMine').onclick=function(){ if(!followS.url){ toast('还没有录音'); return; } new Audio(followS.url).play(); };
+    if($('#prevw')) $('#prevw').onclick=followPrev;
     if($('#again')) $('#again').onclick=followStartRec;
     if($('#nextw')) $('#nextw').onclick=startFollowNext;
     if($('#stars') && $('#stars').classList.contains('manual')){

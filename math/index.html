@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="口算小闯关">
+<meta name="theme-color" content="#3b6cf6">
+<title>口算小闯关 · 两位数乘一位数</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  background:var(--bg);color:var(--ink);overscroll-behavior:none;
+  --bg:#f4f6fb;--card:#fff;--ink:#16202c;--muted:#7c8798;--line:#e7ecf4;
+  --brand:#3b6cf6;--brand2:#7a5cff;--ok:#12a150;--okbg:#e8f8ee;--bad:#e5484d;--badbg:#fdecec;
+  --soft:#eef3ff;--warn:#f59e0b;
+}
+@media (prefers-color-scheme:dark){
+  body{--bg:#0f141c;--card:#18202b;--ink:#e8eef7;--muted:#8e9aab;--line:#26303d;--soft:#1d2836;--okbg:#12301f;--badbg:#33191b}
+}
+.app{display:flex;flex-direction:column;height:100dvh;max-width:600px;margin:0 auto;position:relative}
+main{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 14px calc(20px + env(safe-area-inset-bottom))}
+h1,h2,h3,p{margin:0}
+.small{font-size:13px}.muted{color:var(--muted)}.center{text-align:center}
+.card{background:var(--card);border-radius:20px;padding:16px;box-shadow:0 2px 10px rgba(22,32,44,.06);border:1px solid var(--line)}
+.row{display:flex;gap:10px;align-items:center}
+.between{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;border-radius:14px;
+  padding:14px 18px;font-size:17px;font-weight:600;background:var(--soft);color:var(--ink);
+  cursor:pointer;min-height:50px;font-family:inherit;transition:transform .06s ease,opacity .15s}
+.btn:active{transform:scale(.97)}
+.btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;box-shadow:0 6px 16px rgba(59,108,246,.28)}
+.btn.ok{background:var(--ok);color:#fff}
+.btn.bad{background:var(--bad);color:#fff}
+.btn.ghost{background:transparent;border:1.5px solid var(--line)}
+.btn.block{width:100%}
+.btn:disabled{opacity:.45}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:9px 16px;
+  font-size:15px;font-weight:600;color:var(--ink);font-family:inherit;cursor:pointer;min-height:40px}
+.chip.on{background:var(--soft);border-color:var(--brand);color:var(--brand)}
+.sec-title{font-size:14px;font-weight:700;color:var(--muted);margin:18px 4px 8px}
+.pill{background:var(--soft);color:var(--brand);border-radius:999px;padding:4px 10px;font-size:12px;font-weight:700}
+.progress-line{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.bar{flex:1;height:8px;border-radius:999px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--brand),var(--brand2));width:0;transition:width .25s}
+.top{display:flex;align-items:center;justify-content:space-between;padding:10px 4px 2px}
+.title{font-size:22px;font-weight:800;letter-spacing:.5px}
+.q-wrap{display:flex;flex-direction:column;justify-content:center;min-height:44vh}
+.q{font-size:46px;font-weight:800;text-align:center;letter-spacing:2px;line-height:1.25}
+.q .op{color:var(--brand)}
+.ans{display:inline-block;min-width:120px;border-bottom:4px solid var(--brand);color:var(--brand);padding:0 8px}
+.ans.empty{color:var(--line)}
+.fb{margin-top:14px;text-align:center;font-size:15px;font-weight:700;min-height:24px}
+.fb.ok{color:var(--ok)}.fb.bad{color:var(--bad)}
+.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.key{min-height:58px;border-radius:16px;border:1.5px solid var(--line);background:var(--card);
+  font-size:24px;font-weight:700;font-family:inherit;color:var(--ink);cursor:pointer;transition:transform .06s}
+.key:active{transform:scale(.96);background:var(--soft)}
+.key.ok{background:var(--ok);color:#fff;border-color:var(--ok)}
+.key.del{color:var(--bad)}
+.mini{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:10px}
+.mini div{background:var(--soft);border-radius:10px;padding:8px 2px;text-align:center;font-size:11px;color:var(--muted)}
+.mini div b{display:block;font-size:13px;color:var(--ink);margin-top:2px}
+.wrong-item{display:flex;justify-content:space-between;align-items:center;padding:12px 4px;border-bottom:1px solid var(--line);font-size:17px}
+.wrong-item:last-child{border-bottom:0}
+.wrong-item b{font-variant-numeric:tabular-nums}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:center}
+.stats .n{font-size:22px;font-weight:800}
+.stats .l{font-size:12px;color:var(--muted);margin-top:2px}
+</style>
+</head>
+<body>
+<div class="app">
+  <main id="main"></main>
+</div>
+<script>
+"use strict";
+var KEY="math_v1";
+var $=function(s){return document.querySelector(s);};
+var S=null, Q=null;
+
+function todayStr(){var d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
+function load(){
+  try{var o=JSON.parse(localStorage.getItem(KEY)||"null"); if(o&&typeof o==="object") return o;}catch(e){}
+  return {n:20,days:{},wrong:{},lastDay:""};
+}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+
+/* ---------- 出题 ---------- */
+function classify(a,b){
+  var u=a%10,t=Math.floor(a/10);
+  if(b===0||b===1) return "L4";
+  var cu=u*b, carry=Math.floor(cu/10), ct=t*b+carry;
+  if(u===0||u===5) return "L4";
+  if(cu<10&&ct<10) return "L1";
+  if(cu>=10&&ct<10) return "L2";
+  return "L3";
+}
+function pickB(){
+  /* 0—9 全覆盖；0、1 出现少一些，避免整组都是送分题 */
+  var r=Math.random();
+  if(r<0.06) return 0;
+  if(r<0.12) return 1;
+  return 2+Math.floor(Math.random()*8);
+}
+function rnd(n){ return Math.floor(Math.random()*n); }
+/* 按档直接构造，保证每档占比可控 */
+function makeL1(){          /* 不进位 */
+  var b=2+rnd(3), mt=Math.floor(9/b), t=1+rnd(mt), u=rnd(Math.floor(9/b)+1);
+  return {a:10*t+u,b:b};
+}
+function makeL2(){          /* 个位进位、十位不进位 */
+  for(var i=0;i<300;i++){
+    var b=2+rnd(8), uMin=Math.ceil(10/b);
+    if(uMin>9) continue;
+    var u=uMin+rnd(10-uMin), carry=Math.floor(u*b/10), tMax=Math.floor((9-carry)/b);
+    if(tMax<1) continue;
+    var t=1+rnd(tMax);
+    if(t*b+carry>=10) continue;
+    return {a:10*t+u,b:b};
+  }
+  return makeL1();
+}
+function makeL3(){          /* 连续进位 */
+  for(var i=0;i<300;i++){
+    var b=2+rnd(8), u=rnd(10), carry=Math.floor(u*b/10), tMin=Math.ceil((10-carry)/b);
+    if(tMin<1) tMin=1;
+    if(tMin>9) continue;
+    var t=tMin+rnd(10-tMin);
+    if(t*b+carry<10) continue;
+    return {a:10*t+u,b:b};
+  }
+  return makeL1();
+}
+function makeL4(){          /* 特殊：×0/×1、整十、末尾 5 */
+  var r=rnd(3), t=1+rnd(9), b=2+rnd(8);
+  if(r===0){ return {a:10+rnd(90), b:rnd(2)}; }
+  if(r===1){ return {a:10*t, b:b}; }
+  return {a:10*t+(rnd(2)?0:5), b:b};
+}
+function genSet(n){
+  var l1=Math.round(n*.25), l2=Math.round(n*.3), l3=Math.round(n*.3), l4=Math.max(0,n-l1-l2-l3);
+  var plan=[["L1",l1],["L2",l2],["L3",l3],["L4",l4]];
+  var makers={L1:makeL1,L2:makeL2,L3:makeL3,L4:makeL4};
+  var out=[], seen={};
+  plan.forEach(function(pr){
+    var tier=pr[0], need=pr[1], guard=0;
+    while(need>0&&guard<3000){
+      guard++;
+      var q=makers[tier](), k=q.a+"x"+q.b;
+      if(seen[k]||q.a<10||q.a>99||q.b<0||q.b>9) continue;
+      seen[k]=1; need--;
+      out.push({a:q.a,b:q.b,ans:q.a*q.b,tier:tier,s:"wrong"});
+    }
+  });
+  while(out.length<n){
+    var q2=makers.L3(), k2=q2.a+"x"+q2.b;
+    if(seen[k2]) continue; seen[k2]=1;
+    out.push({a:q2.a,b:q2.b,ans:q2.a*q2.b,tier:"L3",s:"wrong"});
+  }
+  for(var i=out.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var tmp=out[i];out[i]=out[j];out[j]=tmp;}
+  return out;
+}
+function wrongList(){
+  return Object.keys(S.wrong).map(function(k){return S.wrong[k];}).sort(function(x,y){return y.n-x.n;});
+}
+
+/* ---------- 声音 ---------- */
+var AC=null;
+function beep(ok){
+  try{
+    AC=AC||new (window.AudioContext||window.webkitAudioContext)();
+    var t=AC.currentTime,o=AC.createOscillator(),g=AC.createGain();
+    o.connect(g);g.connect(AC.destination);o.type="sine";
+    o.frequency.value=ok?880:220;
+    g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.16,t+.01);
+    g.gain.exponentialRampToValueAtTime(.0001,t+.22);
+    o.start(t);o.stop(t+.24);
+  }catch(e){}
+}
+
+/* ---------- 首页 ---------- */
+function vHome(){
+  var t=todayStr(), d=S.days[t]||{done:0,right:0,ms:0};
+  var acc=d.done?Math.round(d.right/d.done*100):0;
+  var streak=0, dt=new Date();
+  for(var i=0;i<400;i++){
+    var k=new Date(dt.getTime()-i*86400000);
+    var key=k.getFullYear()+"-"+String(k.getMonth()+1).padStart(2,"0")+"-"+String(k.getDate()).padStart(2,"0");
+    var row=S.days[key];
+    if(row&&row.done>0) streak++;
+    else if(i>0) break;
+    else if(!row) break;
+  }
+  var wl=wrongList();
+  var last7="";
+  for(var j=6;j>=0;j--){
+    var dd=new Date(Date.now()-j*86400000);
+    var kk=dd.getFullYear()+"-"+String(dd.getMonth()+1).padStart(2,"0")+"-"+String(dd.getDate()).padStart(2,"0");
+    var r=S.days[kk];
+    var p=r&&r.done?Math.round(r.right/r.done*100):0;
+    last7+='<div>'+(dd.getMonth()+1)+"/"+dd.getDate()+'<b>'+(r&&r.done?p+"%":"—")+'</b></div>';
+  }
+  var html=
+  '<div class="top"><div class="title">口算小闯关</div>'+
+    '<a class="btn ghost" href="../index.html" style="min-height:40px;padding:8px 14px;font-size:14px;text-decoration:none">← 回单词</a></div>'+
+  '<div class="small muted" style="padding:2px 4px 12px">两位数 × 一位数 · 每天 3 分钟</div>'+
+
+  '<div class="card">'+
+    '<div class="between"><div><div class="small muted">今日</div>'+
+      '<div style="font-size:30px;font-weight:800;margin-top:2px">'+d.done+' <span style="font-size:15px;color:var(--muted);font-weight:600">题</span></div></div>'+
+      '<div class="stats" style="flex:0 0 60%">'+
+        '<div><div class="n">'+acc+'%</div><div class="l">正确率</div></div>'+
+        '<div><div class="n">'+streak+'</div><div class="l">连续天数</div></div>'+
+        '<div><div class="n">'+wl.length+'</div><div class="l">待练错题</div></div>'+
+      '</div></div>'+
+    '<div class="mini">'+last7+'</div>'+
+  '</div>'+
+
+  '<div class="sec-title">这一组做几题</div>'+
+  '<div class="chips" id="nums">'+[10,20,30].map(function(v){return '<button class="chip '+(S.n===v?"on":"")+'" data-v="'+v+'">'+v+' 题</button>';}).join("")+'</div>'+
+
+  '<div style="margin-top:16px"><button class="btn primary block" id="start">开始练习</button></div>'+
+  (wl.length?'<div style="margin-top:10px"><button class="btn ghost block" id="redo">重练错题（'+wl.length+' 道）</button></div>':"")+
+
+  '<div class="sec-title">最近 7 天</div>'+
+  '<div class="card small muted" style="line-height:1.9">每格是那天的正确率；没做显示 —。<br>错题会自动进错题本，连续答对 2 次才移出。</div>';
+
+  return {html:html, mount:function(){
+    document.querySelectorAll("#nums .chip").forEach(function(b){
+      b.onclick=function(){ S.n=parseInt(b.getAttribute("data-v"),10); save(); go(vHome); };
+    });
+    $("#start").onclick=function(){ startQuiz(S.n); };
+    if($("#redo")) $("#redo").onclick=function(){ startWrongQuiz(); };
+  }};
+}
+
+/* ---------- 答题 ---------- */
+function startQuiz(n){ Q={qs:genSet(n),i:0,right:0,buf:"",locked:false,t0:Date.now(),wrongMode:false}; go(vQuiz); }
+function startWrongQuiz(){
+  var wl=wrongList(); if(!wl.length){ return; }
+  Q={qs:wl.map(function(w){return {a:w.a,b:w.b,ans:w.a*w.b,tier:"W",s:"wrong",fromWrong:true};}),
+     i:0,right:0,buf:"",locked:false,t0:Date.now(),wrongMode:true};
+  go(vQuiz);
+}
+function vQuiz(){
+  if(!Q) return vHome();
+  if(Q.i>=Q.qs.length) return vDone();
+  var q=Q.qs[Q.i], n=Q.qs.length;
+  var html=
+  '<div class="progress-line"><span class="small muted">'+(Q.i+1)+' / '+n+'</span><div class="bar"><i style="width:'+Math.round(Q.i/n*100)+'%"></i></div>'+
+    (Q.wrongMode?'<span class="pill">错题重练</span>':'')+'</div>'+
+  '<div class="q-wrap">'+
+    '<div class="q">'+q.a+' <span class="op">×</span> '+q.b+' <span class="op">=</span> '+
+      '<span class="ans '+(Q.buf?"":"empty")+'" id="ans">'+(Q.buf||"?")+'</span></div>'+
+    '<div class="fb" id="fb"></div>'+
+  '</div>'+
+  '<div class="pad" id="pad">'+
+    ["1","2","3","4","5","6","7","8","9"].map(function(k){return '<button class="key" data-k="'+k+'">'+k+'</button>';}).join("")+
+    '<button class="key del" data-k="del">⌫</button>'+
+    '<button class="key" data-k="0">0</button>'+
+    '<button class="key ok" data-k="ok">✓</button>'+
+  '</div>'+
+  '<div style="margin-top:10px"><button class="btn ghost block" id="skip">跳过这题</button></div>';
+
+  return {html:html, mount:function(){
+    var inp=function(k){
+      if(Q.locked) return;
+      if(k==="del"){ Q.buf=Q.buf.slice(0,-1); }
+      else if(k==="ok"){ submit(); return; }
+      else if(Q.buf.length<4){ if(!(Q.buf===""&&k==="0")) Q.buf+=k; }
+      $("#ans").textContent=Q.buf||"?";
+      $("#ans").className="ans "+(Q.buf?"":"empty");
+    };
+    document.querySelectorAll("#pad .key").forEach(function(b){
+      b.onclick=function(){ inp(b.getAttribute("data-k")); };
+    });
+    $("#skip").onclick=function(){ if(!Q.locked) finishQ(false,true); };
+    document.onkeydown=function(e){
+      if(/^[0-9]$/.test(e.key)) inp(e.key);
+      else if(e.key==="Backspace"){ e.preventDefault(); inp("del"); }
+      else if(e.key==="Enter"){ e.preventDefault(); inp("ok"); }
+    };
+    function submit(){ if(!Q.buf){ return; } finishQ(parseInt(Q.buf,10)===q.ans,false); }
+    function finishQ(ok,skipped){
+      Q.locked=true;
+      var fb=$("#fb");
+      if(ok){
+        fb.className="fb ok"; fb.textContent="✓ 答对了";
+        $("#ans").style.color="var(--ok)"; $("#ans").style.borderColor="var(--ok)";
+        beep(true); Q.right++;
+        if(q.fromWrong){ var k=q.a+"x"+q.b; if(S.wrong[k]){ S.wrong[k].n--; if(S.wrong[k].n<=0) delete S.wrong[k]; save(); } }
+        setTimeout(function(){ Q.i++; Q.buf=""; Q.locked=false; go(vQuiz); },650);
+      }else{
+        fb.className="fb bad"; fb.textContent=(skipped?"跳过 · ":"✗ 错了，")+"正确答案是 "+q.ans;
+        $("#ans").style.color="var(--bad)"; $("#ans").style.borderColor="var(--bad)";
+        beep(false);
+        if(!skipped){
+          var kk=q.a+"x"+q.b;
+          S.wrong[kk]=S.wrong[kk]||{a:q.a,b:q.b,n:0};
+          S.wrong[kk].n++;
+          save();
+        }
+        setTimeout(function(){ Q.i++; Q.buf=""; Q.locked=false; go(vQuiz); },1700);
+      }
+    }
+  }};
+}
+
+/* ---------- 结算 ---------- */
+function vDone(){
+  var n=Q.qs.length, r=Q.right, acc=n?Math.round(r/n*100):0;
+  var secs=Math.round((Date.now()-Q.t0)/1000);
+  var t=todayStr(); S.days[t]=S.days[t]||{done:0,right:0,ms:0};
+  if(!Q.counted){
+    S.days[t].done+=n; S.days[t].right+=r; S.days[t].ms+=secs*1000;
+    S.lastDay=t; save(); Q.counted=true;
+  }
+  var html=
+  '<div class="center" style="padding-top:6vh">'+
+    '<div style="font-size:52px">'+(acc>=90?"🏆":acc>=70?"👍":"💪")+'</div>'+
+    '<div style="font-size:24px;font-weight:800;margin-top:10px">'+(Q.wrongMode?"错题重练完成":"本组完成")+'</div>'+
+    '<div class="small muted" style="margin-top:6px">对 '+r+' / '+n+' 题 · 正确率 '+acc+'% · 用时 '+Math.floor(secs/60)+' 分 '+(secs%60)+' 秒</div>'+
+    '<div style="display:flex;gap:10px;margin-top:26px">'+
+      '<button class="btn primary" id="again" style="flex:1">再来一组</button>'+
+      '<button class="btn ghost" id="home" style="flex:1">回首页</button>'+
+    '</div>'+
+    (wrongList().length?'<div style="margin-top:10px"><button class="btn ghost block" id="redo">重练错题（'+wrongList().length+' 道）</button></div>':"")+
+  '</div>';
+  return {html:html, mount:function(){
+    $("#again").onclick=function(){ startQuiz(S.n); };
+    $("#home").onclick=function(){ go(vHome); };
+    if($("#redo")) $("#redo").onclick=startWrongQuiz;
+  }};
+}
+
+/* ---------- 路由 ---------- */
+function go(fn){
+  var v=fn();
+  $("#main").innerHTML=v.html;
+  if(v.mount) v.mount();
+  window.scrollTo(0,0);
+  $("#main").scrollTop=0;
+}
+S=load();
+go(vHome);
+</script>
+</body>
+</html>

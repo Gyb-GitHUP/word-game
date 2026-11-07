@@ -83,7 +83,7 @@ nav button.on{color:var(--brand);background:var(--soft)}
 .progress-line{display:flex;align-items:center;gap:10px;margin-bottom:14px}
 .progress-line .bar{flex:1}
 .flash{margin:12px 0 0;perspective:1000px;cursor:pointer;user-select:none}
-.flash-inner{position:relative;width:100%;min-height:260px;transition:transform .45s cubic-bezier(.3,.8,.4,1);transform-style:preserve-3d}
+.flash-inner{position:relative;width:100%;min-height:300px;transition:transform .45s cubic-bezier(.3,.8,.4,1);transform-style:preserve-3d}
 .flash.flipped .flash-inner{transform:rotateY(180deg)}
 .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
   background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:0 6px 24px rgba(22,32,44,.07);
@@ -97,6 +97,12 @@ nav button.on{color:var(--brand);background:var(--soft)}
   font-size:28px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .speaker:active{transform:scale(.94)}
 .rate-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:14px}
+.exbox{margin-top:2px;display:flex;flex-direction:column;align-items:center;gap:4px;max-width:100%}
+.ex{font-size:16px;font-weight:700;color:var(--ink);text-align:center;line-height:1.35}
+.excn{font-size:13px;color:var(--muted);text-align:center;line-height:1.3}
+.ex-speaker{border:0;background:var(--soft);color:var(--brand);border-radius:999px;padding:5px 12px;
+  font-size:12px;font-weight:700;cursor:pointer;margin-top:2px}
+.ex-speaker:active{transform:scale(.95)}
 .rate-row .btn{padding:14px 6px;font-size:15px}
 
 /* 输入 */
@@ -195,44 +201,44 @@ var LIB={
   name:'人教PEP 2024 · 四年级下册',
   units:[
     {id:'g4b-u1',title:'Unit 1 Class rules',cn:'课堂规则',words:[
-      ['sorry','对不起；抱歉','/ˈsɒri/'],['hurry up','快点；赶快','/ˈhʌri ʌp/'],['late','迟到','/leɪt/'],['class','课；课程；班级','/klɑːs/'],
-      ['ready','准备好的','/ˈredi/'],['rule','规则；规章','/ruːl/'],['classroom','教室','/ˈklɑːsruːm/'],['turn off','关掉','/tɜːn ɒf/'],
-      ['light','灯；光','/laɪt/'],['blackboard','黑板','/ˈblækbɔːd/'],['desk','书桌；办公桌','/desk/'],['chair','椅子','/tʃeə(r)/'],
-      ['tidy','整洁的；整理','/ˈtaɪdi/'],['music','音乐','/ˈmjuːzɪk/'],['door','门','/dɔː(r)/'],['window','窗','/ˈwɪndəʊ/'],['fan','风扇','/fæn/'],
-      ['when','当……时；什么时候','/wen/'],['understand','懂；理解','/ˌʌndəˈstænd/'],['wall','墙；壁','/wɔːl/'],
-      ['newspaper','报纸','/ˈnjuːzpeɪpə(r)/'],['handout','分发','/ˈhændaʊt/'],['workbook','练习册；作业本','/ˈwɜːkbʊk/']
+      ['sorry','对不起；抱歉','/ˈsɒri/','Sorry, I am late.','对不起，我迟到了。'],['hurry up','快点；赶快','/ˈhʌri ʌp/','Hurry up! The class starts.','快点！要上课了。'],['late','迟到','/leɪt/','Do not be late for school.','上学别迟到。'],['class','课；课程；班级','/klɑːs/','We are in Class Two.','我们在二班。'],
+      ['ready','准备好的','/ˈredi/','Are you ready for class?','你准备好上课了吗？'],['rule','规则；规章','/ruːl/','We must follow the class rule.','我们必须遵守班规。'],['classroom','教室','/ˈklɑːsruːm/','Our classroom is big and clean.','我们教室又大又干净。'],['turn off','关掉','/tɜːn ɒf/','Please turn off the light.','请关灯。'],
+      ['light','灯；光','/laɪt/','The light is on.','灯亮着。'],['blackboard','黑板','/ˈblækbɔːd/','The teacher writes on the blackboard.','老师在黑板上写字。'],['desk','书桌；办公桌','/desk/','My desk is near the window.','我的书桌在窗边。'],['chair','椅子','/tʃeə(r)/','Put the chair here.','把椅子放这儿。'],
+      ['tidy','整洁的；整理','/ˈtaɪdi/','Keep your desk tidy.','保持书桌整洁。'],['music','音乐','/ˈmjuːzɪk/','We have music in the morning.','我们上午有音乐课。'],['door','门','/dɔː(r)/','Please close the door.','请关门。'],['window','窗','/ˈwɪndəʊ/','Open the window, please.','请开窗。'],['fan','风扇','/fæn/','Turn on the fan. It is hot.','开风扇，天热。'],
+      ['when','当……时；什么时候','/wen/','When do we have English?','我们什么时候上英语课？'],['understand','懂；理解','/ˌʌndəˈstænd/','I understand the rule now.','我现在懂这个规则了。'],['wall','墙；壁','/wɔːl/','There is a map on the wall.','墙上有一张地图。'],
+      ['newspaper','报纸','/ˈnjuːzpeɪpə(r)/','Grandpa reads a newspaper.','爷爷看报纸。'],['handout','分发','/ˈhændaʊt/','The teacher gives us a handout.','老师发给我们一张讲义。'],['workbook','练习册；作业本','/ˈwɜːkbʊk/','Open your workbook, please.','请打开练习册。']
     ]},
     {id:'g4b-u2',title:'Unit 2 Family rules',cn:'家庭规则',words:[
-      ['watch','看','/wɒtʃ/'],['TV','电视','/ˌtiː ˈviː/'],['homework','家庭作业','/ˈhəʊmwɜːk/'],['first','首先；第一','/fɜːst/'],['wet','湿的；未干的','/wet/'],
-      ['run','跑；奔跑','/rʌn/'],['living room','客厅；起居室','/ˈlɪvɪŋ ruːm/'],['safe','安全的','/seɪf/'],['word','单词；言语','/wɜːd/'],
-      ['wash','洗','/wɒʃ/'],['helpful','有帮助的；有用的','/ˈhelpfl/'],['loud','说话太大声的；吵闹的','/laʊd/'],['sleep','睡觉','/sliːp/'],
-      ['bedroom','卧室','/ˈbedruːm/'],['kitchen','厨房','/ˈkɪtʃən/'],['study','书房','/ˈstʌdi/'],['bathroom','浴室；洗手间','/ˈbɑːθruːm/'],
-      ['think','想；思考','/θɪŋk/'],['work','工作；做（某事）','/wɜːk/'],['hard','努力地；费力地','/hɑːd/'],
-      ['follow','遵循；听从','/ˈfɒləʊ/'],['feel','觉得；感到','/fiːl/']
+      ['watch','看','/wɒtʃ/','We watch TV after dinner.','晚饭后我们看电视。'],['TV','电视','/ˌtiː ˈviː/','Do not watch TV too long.','别看太久电视。'],['homework','家庭作业','/ˈhəʊmwɜːk/','I do my homework first.','我先做作业。'],['first','首先；第一','/fɜːst/','Wash your hands first.','先洗手。'],['wet','湿的；未干的','/wet/','My hands are wet.','我的手是湿的。'],
+      ['run','跑；奔跑','/rʌn/','Do not run in the living room.','别在客厅跑。'],['living room','客厅；起居室','/ˈlɪvɪŋ ruːm/','We sit in the living room.','我们坐在客厅。'],['safe','安全的','/seɪf/','It is safe to play here.','在这里玩很安全。'],['word','单词；言语','/wɜːd/','I learn a new word today.','我今天学了一个新词。'],
+      ['wash','洗','/wɒʃ/','Wash your hands before dinner.','晚饭前洗手。'],['helpful','有帮助的；有用的','/ˈhelpfl/','I am helpful at home.','我在家很有用。'],['loud','说话太大声的；吵闹的','/laʊd/','Do not be loud in the bedroom.','别在卧室大声喧哗。'],['sleep','睡觉','/sliːp/','I sleep at nine.','我九点睡觉。'],
+      ['bedroom','卧室','/ˈbedruːm/','My bedroom is small but nice.','我的卧室小而舒适。'],['kitchen','厨房','/ˈkɪtʃən/','Mum cooks in the kitchen.','妈妈在厨房做饭。'],['study','书房','/ˈstʌdi/','Dad works in the study.','爸爸在书房工作。'],['bathroom','浴室；洗手间','/ˈbɑːθruːm/','I wash my face in the bathroom.','我在浴室洗脸。'],
+      ['think','想；思考','/θɪŋk/','Let me think about it.','让我想想。'],['work','工作；做（某事）','/wɜːk/','My parents work hard.','我父母工作努力。'],['hard','努力地；费力地','/hɑːd/','He studies hard every day.','他每天努力学习。'],
+      ['follow','遵循；听从','/ˈfɒləʊ/','Follow the family rules.','遵守家规。'],['feel','觉得；感到','/fiːl/','I feel happy today.','我今天感觉很开心。']
     ]},
     {id:'g4b-u3',title:'Unit 3 Time for school',cn:'上学时间',words:[
-      ['over','结束（的）','/ˈəʊvə(r)/'],['kid','小孩','/kɪd/'],['dinner','正餐','/ˈdɪnə(r)/'],['art','美术；艺术','/ɑːt/'],['lunch','午餐','/lʌntʃ/'],
-      ['maths','数学','/mæθs/'],['get up','起床','/ˈɡet ʌp/'],['go to school','上学','/ɡəʊ tə skuːl/'],['go home','回家','/ɡəʊ həʊm/'],['go to bed','上床睡觉','/ɡəʊ tə bed/'],
-      ['want','想要','/wɒnt/'],['clock','时钟','/klɒk/'],['just','只是；仅仅；正要','/dʒʌst/'],['minute','分钟','/ˈmɪnɪt/']
+      ['over','结束（的）','/ˈəʊvə(r)/','School is over at four.','学校四点放学。'],['kid','小孩','/kɪd/','The kid is only five.','这个小孩才五岁。'],['dinner','正餐','/ˈdɪnə(r)/','We have dinner at six.','我们六点吃晚饭。'],['art','美术；艺术','/ɑːt/','I have an art lesson today.','我今天有美术课。'],['lunch','午餐','/lʌntʃ/','We have lunch at school.','我们在学校吃午饭。'],
+      ['maths','数学','/mæθs/','Maths is my favourite subject.','数学是我最喜欢的科目。'],['get up','起床','/ˈɡet ʌp/','I get up at seven.','我七点起床。'],['go to school','上学','/ɡəʊ tə skuːl/','I go to school at seven thirty.','我七点半去上学。'],['go home','回家','/ɡəʊ həʊm/','Let\'s go home after school.','放学后我们回家吧。'],['go to bed','上床睡觉','/ɡəʊ tə bed/','I go to bed at nine.','我九点上床睡觉。'],
+      ['want','想要','/wɒnt/','I want a new clock.','我想要一个新时钟。'],['clock','时钟','/klɒk/','The clock is on the wall.','钟在墙上。'],['just','只是；仅仅；正要','/dʒʌst/','It is just seven.','正好七点。'],['minute','分钟','/ˈmɪnɪt/','Wait a minute, please.','请等一下。']
     ]},
     {id:'g4b-u4',title:'Unit 4 Going shopping',cn:'去购物',words:[
-      ['jacket','夹克衫；短上衣','/ˈdʒækɪt/'],['skirt','裙子','/skɜːt/'],['dear','亲爱的','/dɪə(r)/'],['expensive','昂贵的','/ɪkˈspensɪv/'],
-      ['take','买下','/teɪk/'],['cheap','便宜的','/tʃiːp/'],['shoe','鞋','/ʃuː/'],['beautiful','美丽的','/ˈbjuːtɪfl/'],['hat','帽子','/hæt/'],
-      ['sunglasses','太阳镜；墨镜','/ˈsʌnɡlɑːsɪz/'],['free','免费的','/friː/'],['large','大号的','/lɑːdʒ/'],['size','尺码；号','/saɪz/'],
-      ['list','清单；目录','/lɪst/'],['try on','试穿','/ˈtraɪ ɒn/'],['any','任何的；任一的','/ˈeni/'],['trousers','裤子','/ˈtraʊzəz/'],
-      ['pair','一条；一副','/peə(r)/'],['clothes','衣服；服装','/kləʊðz/'],['those','那些','/ðəʊz/'],['shorts','短裤','/ʃɔːts/']
+      ['jacket','夹克衫；短上衣','/ˈdʒækɪt/','This jacket is too small.','这件夹克太小了。'],['skirt','裙子','/skɜːt/','The skirt is pink.','这条裙子是粉色的。'],['dear','亲爱的','/dɪə(r)/','The bag is too dear.','这个包太贵了。'],['expensive','昂贵的','/ɪkˈspensɪv/','The watch is expensive.','这块手表很贵。'],
+      ['take','买下','/teɪk/','I\'ll take the blue one.','我要买蓝色的那件。'],['cheap','便宜的','/tʃiːp/','These shoes are cheap.','这双鞋很便宜。'],['shoe','鞋','/ʃuː/','I need a new pair of shoes.','我需要一双新鞋。'],['beautiful','美丽的','/ˈbjuːtɪfl/','What a beautiful dress!','多漂亮的连衣裙！'],['hat','帽子','/hæt/','He wears a hat in the sun.','他晒太阳时戴帽子。'],
+      ['sunglasses','太阳镜；墨镜','/ˈsʌnɡlɑːsɪz/','She wears sunglasses.','她戴太阳镜。'],['free','免费的','/friː/','The bag is free today.','今天这个包免费。'],['large','大号的','/lɑːdʒ/','This shirt is too large.','这件衬衫太大。'],['size','尺码；号','/saɪz/','What size do you want?','你要什么尺码？'],
+      ['list','清单；目录','/lɪst/','Make a shopping list.','列一张购物清单。'],['try on','试穿','/ˈtraɪ ɒn/','Can I try on this coat?','我可以试穿这件外套吗？'],['any','任何的；任一的','/ˈeni/','Do you have any shorts?','你们有短裤吗？'],['trousers','裤子','/ˈtraʊzəz/','The trousers are black.','这条裤子是黑色的。'],
+      ['pair','一条；一副','/peə(r)/','I want a pair of gloves.','我想要一双手套。'],['clothes','衣服；服装','/kləʊðz/','Put on your clothes.','穿上你的衣服。'],['those','那些','/ðəʊz/','Those shoes are nice.','那双鞋很好看。'],['shorts','短裤','/ʃɔːts/','He wears shorts in summer.','他夏天穿短裤。']
     ]},
     {id:'g4b-u5',title:'Unit 5 Farms and us',cn:'农场与我们',words:[
-      ['cow','奶牛','/kaʊ/'],['horse','马','/hɔːs/'],['sheep','绵羊','/ʃiːp/'],['pig','猪','/pɪɡ/'],['chicken','鸡；鸡肉','/ˈtʃɪkɪn/'],
-      ['tomato','西红柿','/təˈmɑːtəʊ/'],['bee','蜜蜂','/biː/'],['mouse','老鼠','/maʊs/'],['carrot','胡萝卜','/ˈkærət/'],['potato','土豆','/pəˈteɪtəʊ/'],
-      ['green bean','四季豆；青刀豆','/ɡriːn biːn/'],['can','金属罐','/kæn/'],['a box of','一盒；一箱','/ə bɒks əv/']
+      ['cow','奶牛','/kaʊ/','The cow gives us milk.','奶牛给我们牛奶。'],['horse','马','/hɔːs/','The horse runs fast.','马跑得很快。'],['sheep','绵羊','/ʃiːp/','The sheep is white.','这只绵羊是白色的。'],['pig','猪','/pɪɡ/','The pig is on the farm.','猪在农场里。'],['chicken','鸡；鸡肉','/ˈtʃɪkɪn/','The chicken is small.','这只鸡很小。'],
+      ['tomato','西红柿','/təˈmɑːtəʊ/','I like tomato soup.','我喜欢西红柿汤。'],['bee','蜜蜂','/biː/','A bee is on the flower.','一只蜜蜂在花上。'],['mouse','老鼠','/maʊs/','The mouse is under the desk.','老鼠在桌子下面。'],['carrot','胡萝卜','/ˈkærət/','Rabbits like carrots.','兔子喜欢胡萝卜。'],['potato','土豆','/pəˈteɪtəʊ/','The potato is big.','这个土豆很大。'],
+      ['green bean','四季豆；青刀豆','/ɡriːn biːn/','I eat green beans for lunch.','我午饭吃四季豆。'],['can','金属罐','/kæn/','I want a can of coke.','我想要一罐可乐。'],['a box of','一盒；一箱','/ə bɒks əv/','She buys a box of eggs.','她买了一盒鸡蛋。']
     ]},
     {id:'g4b-u6',title:'Unit 6 From farm to table',cn:'从农场到餐桌',words:[
-      ['feed','给（人或动物）食物；饲养','/fiːd/'],['pass','给；递','/pɑːs/'],['pick','采；摘','/pɪk/'],['milk','挤奶','/mɪlk/'],
-      ['knife','刀','/naɪf/'],['fork','餐叉','/fɔːk/'],['chopstick','筷子','/ˈtʃɒpstɪk/'],['waste','浪费；废品','/weɪst/'],['food','菜肴；食物','/fuːd/'],
-      ['delicious','美味的；可口的','/dɪˈlɪʃəs/'],['clear the table','收拾餐桌','/klɪə ðə ˈteɪbl/'],['set the table','摆放餐具','/set ðə ˈteɪbl/'],
-      ['bowl','碗','/bəʊl/'],['spoon','勺；匙；调羹','/spuːn/'],['supermarket','超市','/ˈsuːpəmɑːkɪt/'],['herself','她自己','/hɜːˈself/'],
-      ['week','周；星期','/wiːk/'],['salad','蔬菜沙拉','/ˈsæləd/']
+      ['feed','给（人或动物）食物；饲养','/fiːd/','I feed the chickens every day.','我每天喂鸡。'],['pass','给；递','/pɑːs/','Please pass me the salt.','请把盐递给我。'],['pick','采；摘','/pɪk/','We pick apples in autumn.','我们秋天摘苹果。'],['milk','挤奶','/mɪlk/','The farmer milks the cow.','农民给奶牛挤奶。'],
+      ['knife','刀','/naɪf/','Be careful with the knife.','小心刀。'],['fork','餐叉','/fɔːk/','He eats with a fork.','他用叉子吃饭。'],['chopstick','筷子','/ˈtʃɒpstɪk/','I can use chopsticks.','我会用筷子。'],['waste','浪费；废品','/weɪst/','Do not waste food.','不要浪费食物。'],['food','菜肴；食物','/fuːd/','Chinese food is delicious.','中国菜很好吃。'],
+      ['delicious','美味的；可口的','/dɪˈlɪʃəs/','The soup is delicious.','汤很好喝。'],['clear the table','收拾餐桌','/klɪə ðə ˈteɪbl/','I clear the table after dinner.','晚饭后我收拾餐桌。'],['set the table','摆放餐具','/set ðə ˈteɪbl/','Please help me set the table.','请帮我摆放餐具。'],
+      ['bowl','碗','/bəʊl/','There is rice in the bowl.','碗里有米饭。'],['spoon','勺；匙；调羹','/spuːn/','Eat the soup with a spoon.','用勺子喝汤。'],['supermarket','超市','/ˈsuːpəmɑːkɪt/','We buy food in the supermarket.','我们在超市买食物。'],['herself','她自己','/hɜːˈself/','She makes a salad herself.','她自己做了一份沙拉。'],
+      ['week','周；星期','/wiːk/','I go to the farm once a week.','我每周去一次农场。'],['salad','蔬菜沙拉','/ˈsæləd/','The salad is fresh and healthy.','沙拉新鲜又健康。']
     ]}
   ]
 };
@@ -241,57 +247,57 @@ var G5A={
   name:'人教PEP · 五年级上册',
   units:[
     {id:'g5a-u1',title:'Unit 1',cn:'第一单元',words:[
-      ['team','（游戏或运动的）队；（一起工作的）组，班','/tiːm/'],['player','运动员；参赛选手','/ˈpleɪə(r)/'],['him','他','/hɪm/'],
-      ['lovely','美丽的；优美的','/ˈlʌvli/'],['clever','聪明的；聪颖的','/ˈklevə(r)/'],['young','幼小的；年轻的','/jʌŋ/'],
-      ['hard-working','工作努力的；辛勤的','/ˌhɑːd ˈwɜːkɪŋ/'],['science','科学；自然科学','/ˈsaɪəns/'],['robot','机器人','/ˈrəʊbɒt/'],
-      ['jump','跳；跃','/dʒʌmp/'],['rope','绳；粗绳','/rəʊp/'],['piano','钢琴','/piˈænəʊ/'],
-      ['chess','国际象棋','/tʃes/'],['front','前部','/frʌnt/'],['easy','容易的；轻易的','/ˈiːzi/'],
-      ['star','歌唱（或表演）明星','/stɑː/'],['wonderful','令人赞叹的；精彩的；绝妙的','/ˈwʌndəfl/'],['Australia','澳大利亚','/ɒˈstreɪliə/']
+      ['team','（游戏或运动的）队；（一起工作的）组，班','/tiːm/','Our team wins the game!','我们队赢了比赛！'],['player','运动员；参赛选手','/ˈpleɪə(r)/','He is a good football player.','他是个好足球运动员。'],['him','他','/hɪm/','I often play chess with him.','我常和他下棋。'],
+      ['lovely','美丽的；优美的','/ˈlʌvli/','What a lovely garden!','多么美丽的花园！'],['clever','聪明的；聪颖的','/ˈklevə(r)/','The clever robot can jump.','聪明的机器人会跳。'],['young','幼小的；年轻的','/jʌŋ/','The young player is from Australia.','这位年轻选手来自澳大利亚。'],
+      ['hard-working','工作努力的；辛勤的','/ˌhɑːd ˈwɜːkɪŋ/','She is a hard-working student.','她是个努力的学生。'],['science','科学；自然科学','/ˈsaɪəns/','I like science very much.','我很喜欢科学。'],['robot','机器人','/ˈrəʊbɒt/','The robot can play the piano.','机器人会弹钢琴。'],
+      ['jump','跳；跃','/dʒʌmp/','Let\'s jump over the rope.','我们跳过绳子吧。'],['rope','绳；粗绳','/rəʊp/','He can skip rope very fast.','他跳绳跳得很快。'],['piano','钢琴','/piˈænəʊ/','She plays the piano every day.','她每天弹钢琴。'],
+      ['chess','国际象棋','/tʃes/','Do you like playing chess?','你喜欢下国际象棋吗？'],['front','前部','/frʌnt/','Please sit in the front.','请坐在前面。'],['easy','容易的；轻易的','/ˈiːzi/','This song is easy to sing.','这首歌很容易唱。'],
+      ['star','歌唱（或表演）明星','/stɑː/','The young star is very famous.','这位年轻明星很有名。'],['wonderful','令人赞叹的；精彩的；绝妙的','/ˈwʌndəfl/','The show is wonderful!','演出太精彩了！'],['Australia','澳大利亚','/ɒˈstreɪliə/','My teacher comes from Australia.','我老师来自澳大利亚。']
     ]},
     {id:'g5a-u2',title:'Unit 2',cn:'第二单元',words:[
-      ['sad','悲哀的；难过的','/sæd/'],['matter','事情；问题','/ˈmætə(r)/'],['project','项目；方案','/ˈprɒdʒekt/'],
-      ['centre','中心','/ˈsentə(r)/'],['agree','同意；赞成','/əˈɡriː/'],['finish','完成；做好','/ˈfɪnɪʃ/'],
-      ['worried','担心的；担忧的','/ˈwʌrid/'],['both','两者','/bəʊθ/'],['excited','激动的；兴奋的','/ɪkˈsaɪtɪd/'],
-      ['wrong','错误的','/rɒŋ/'],['angry','愤怒的；生气的','/ˈæŋɡri/'],['afraid','担心；害怕','/əˈfreɪd/'],
-      ['parent','父亲；母亲','/ˈpeərənt/'],['ask','问；询问','/ɑːsk/'],['laugh','笑','/lɑːf/'],
-      ['move','搬家；移动','/muːv/'],['yours','您的（用于书信结尾的签名前）','/jɔːz/']
+      ['sad','悲哀的；难过的','/sæd/','Do not be sad. Let\'s play together.','别难过，我们一起玩。'],['matter','事情；问题','/ˈmætə(r)/','What is the matter with you?','你怎么了？'],['project','项目；方案','/ˈprɒdʒekt/','We finish the project today.','我们今天完成项目。'],
+      ['centre','中心','/ˈsentə(r)/','The shop is in the city centre.','商店在市中心。'],['agree','同意；赞成','/əˈɡriː/','I agree with you.','我同意你。'],['finish','完成；做好','/ˈfɪnɪʃ/','Let\'s finish our homework first.','我们先完成作业。'],
+      ['worried','担心的；担忧的','/ˈwʌrid/','She is worried about the test.','她担心考试。'],['both','两者','/bəʊθ/','Both of us are excited.','我们俩都很兴奋。'],['excited','激动的；兴奋的','/ɪkˈsaɪtɪd/','We are excited about the trip.','我们对这次旅行很兴奋。'],
+      ['wrong','错误的','/rɒŋ/','Sorry, you are wrong.','抱歉，你错了。'],['angry','愤怒的；生气的','/ˈæŋɡri/','Do not be angry with him.','别生他的气。'],['afraid','担心；害怕','/əˈfreɪd/','I am afraid of the dark.','我怕黑。'],
+      ['parent','父亲；母亲','/ˈpeərənt/','My parent will come to school.','我家长会来学校。'],['ask','问；询问','/ɑːsk/','May I ask you a question?','我可以问你一个问题吗？'],['laugh','笑','/lɑːf/','We laugh at the funny story.','我们被这个有趣的故事逗笑了。'],
+      ['move','搬家；移动','/muːv/','They move to a new house.','他们搬到新房子。'],['yours','您的（用于书信结尾的签名前）','/jɔːz/','This book is yours.','这本书是你的。']
     ]},
     {id:'g5a-u3',title:'Unit 3',cn:'第三单元',words:[
-      ['Wednesday','星期三','/ˈwenzdeɪ/'],['subject','科目；学科','/ˈsʌbdʒɪkt/'],['Tuesday','星期二','/ˈtjuːzdeɪ/'],
-      ['Friday','星期五','/ˈfraɪdeɪ/'],['because','因为','/bɪˈkɒz/'],['Monday','星期一','/ˈmʌndeɪ/'],
-      ['Thursday','星期四','/ˈθɜːzdeɪ/'],['start','开始','/stɑːt/'],['usually','通常地；经常地','/ˈjuːʒuəli/'],
-      ['weekend','周末','/ˌwiːkˈend/'],['sometimes','有时；间或','/ˈsʌmtaɪmz/'],['Saturday','星期六','/ˈsætədeɪ/'],
-      ['Sunday','星期日','/ˈsʌndeɪ/'],['lesson','课；一节课','/ˈlesn/'],['evening','晚上；傍晚','/ˈiːvnɪŋ/'],
-      ['answer','答复；回答','/ˈɑːnsə/'],['ping-pong','乒乓球','/ˈpɪŋ pɒŋ/'],['night','夜；夜晚','/naɪt/'],
-      ['visit','看望；拜访；参观','/ˈvɪzɪt/'],['grandparent','祖父；祖母；外祖父；外祖母','/ˈɡrænpeərənt/']
+      ['Wednesday','星期三','/ˈwenzdeɪ/','We have music on Wednesday.','我们星期三有音乐课。'],['subject','科目；学科','/ˈsʌbdʒɪkt/','My favourite subject is English.','我最喜欢的科目是英语。'],['Tuesday','星期二','/ˈtjuːzdeɪ/','There is a maths lesson on Tuesday.','星期二有数学课。'],
+      ['Friday','星期五','/ˈfraɪdeɪ/','We play football on Friday.','我们星期五踢足球。'],['because','因为','/bɪˈkɒz/','I like Sunday because I can rest.','我喜欢星期天，因为可以休息。'],['Monday','星期一','/ˈmʌndeɪ/','The new week starts on Monday.','新的一周从星期一开始。'],
+      ['Thursday','星期四','/ˈθɜːzdeɪ/','We have art on Thursday.','我们星期四有美术课。'],['start','开始','/stɑːt/','Our lesson starts at eight.','我们的课八点开始。'],['usually','通常地；经常地','/ˈjuːʒuəli/','I usually get up at seven.','我通常七点起床。'],
+      ['weekend','周末','/ˌwiːkˈend/','What do you do at the weekend?','你周末做什么？'],['sometimes','有时；间或','/ˈsʌmtaɪmz/','Sometimes I visit my grandparent.','有时我去看望祖父母。'],['Saturday','星期六','/ˈsætədeɪ/','I play ping-pong on Saturday.','我星期六打乒乓球。'],
+      ['Sunday','星期日','/ˈsʌndeɪ/','We have a big dinner on Sunday.','我们星期天吃大餐。'],['lesson','课；一节课','/ˈlesn/','The English lesson is fun.','英语课很有趣。'],['evening','晚上；傍晚','/ˈiːvnɪŋ/','I do my homework in the evening.','我晚上做作业。'],
+      ['answer','答复；回答','/ˈɑːnsə/','Can you answer my question?','你能回答我的问题吗？'],['ping-pong','乒乓球','/ˈpɪŋ pɒŋ/','He is good at ping-pong.','他擅长乒乓球。'],['night','夜；夜晚','/naɪt/','I go to bed at nine at night.','我晚上九点睡觉。'],
+      ['visit','看望；拜访；参观','/ˈvɪzɪt/','We visit our grandparents on Sunday.','我们星期天去看望祖父母。'],['grandparent','祖父；祖母；外祖父；外祖母','/ˈɡrænpeərənt/','My grandparent lives in the country.','我祖父母住在乡下。']
     ]},
     {id:'g5a-u4',title:'Unit 4',cn:'第四单元',words:[
-      ['stay','待；保持；继续是','/steɪ/'],['should','（提出或征询建议）该，可以','/ʃʊd/'],['flu','流行性感冒；流感','/fluː/'],
-      ['else','其他的；别的','/els/'],['exercise','锻炼；训练；操练','/ˈeksəsaɪz/'],['enough','足够的；充足的；充分的','/ɪˈnʌf/'],
-      ['if','如果；假若；倘若','/ɪf/'],['habit','习惯','/ˈhæbɪt/'],['house','房子','/haʊs/'],
-      ['show','（电视或广播）节目','/ʃəʊ/'],['phone','电话；电话机','/fəʊn/'],['then','那么；因此；既然如此','/ðen/'],
-      ['rest','休息；放松','/rest/'],['take care of','爱护；照顾','/teɪk keə(r) ɒv/'],['check','查看；查明','/tʃek/'],
-      ['less','（与不可数名词连用）较少的，更少的','/les/'],['brush','（用刷子）刷净，刷亮，刷平顺','/brʌʃ/'],['tooth','牙；齿（复数 teeth /tiːθ/）','/tuːθ/'],
-      ['twice','两次；两遍','/twaɪs/'],['hour','小时','/ˈaʊə(r)/'],['free','没有安排活动的；空闲的','/friː/']
+      ['stay','待；保持；继续是','/steɪ/','Please stay at home today.','今天请待在家里。'],['should','（提出或征询建议）该，可以','/ʃʊd/','You should drink more water.','你应该多喝水。'],['flu','流行性感冒；流感','/fluː/','He has the flu and stays in bed.','他得了流感，躺在床上。'],
+      ['else','其他的；别的','/els/','What else should I do?','我还应该做什么？'],['exercise','锻炼；训练；操练','/ˈeksəsaɪz/','Do exercise every day to keep healthy.','每天锻炼保持健康。'],['enough','足够的；充足的；充分的','/ɪˈnʌf/','You do not get enough sleep.','你睡眠不足。'],
+      ['if','如果；假若；倘若','/ɪf/','If you are tired, have a rest.','如果累了就休息一下。'],['habit','习惯','/ˈhæbɪt/','Reading is a good habit.','阅读是个好习惯。'],['house','房子','/haʊs/','Their house is near the park.','他们家离公园很近。'],
+      ['show','（电视或广播）节目','/ʃəʊ/','The TV show is about health.','这个电视节目是关于健康的。'],['phone','电话；电话机','/fəʊn/','Do not look at your phone in bed.','别在床上看手机。'],['then','那么；因此；既然如此','/ðen/','Wash your hands, then have dinner.','先洗手，然后吃晚饭。'],
+      ['rest','休息；放松','/rest/','You should have a good rest.','你应该好好休息。'],['take care of','爱护；照顾','/teɪk keə(r) ɒv/','We should take care of our teeth.','我们应该爱护牙齿。'],['check','查看；查明','/tʃek/','Check your homework before you hand it in.','交作业前检查一下。'],
+      ['less','（与不可数名词连用）较少的，更少的','/les/','Eat less meat and more vegetables.','少吃肉，多吃蔬菜。'],['brush','（用刷子）刷净，刷亮，刷平顺','/brʌʃ/','Brush your teeth twice a day.','每天刷两次牙。'],['tooth','牙；齿（复数 teeth /tiːθ/）','/tuːθ/','One tooth hurts.','一颗牙疼。'],
+      ['twice','两次；两遍','/twaɪs/','I brush my teeth twice a day.','我每天刷两次牙。'],['hour','小时','/ˈaʊə(r)/','He plays computer games for an hour.','他玩一小时电脑游戏。'],['free','没有安排活动的；空闲的','/friː/','Are you free this evening?','你今晚有空吗？']
     ]},
     {id:'g5a-u5',title:'Unit 5',cn:'第五单元',words:[
-      ['hungry','感到饿的','/ˈhʌŋɡri/'],['beef','牛肉','/biːf/'],['ice cream','（一份）冰激凌','/ˌaɪs ˈkriːm/'],
-      ['little','少许；一点','/ˈlɪtl/'],['dumpling','饺子；汤圆','/ˈdʌmplɪŋ/'],['tea','茶叶；茶；茶水','/tiː/'],
-      ['hamburger','汉堡包；汉堡牛肉饼','/ˈhæmbɜːɡə(r)/'],['Mrs','（用于女子的姓氏或姓名前）太太，夫人','/ˈmɪsɪz/'],['coconut','椰子','/ˈkəʊkənʌt/'],
-      ['interesting','有趣的；有吸引力的','/ˈɪntrəstɪŋ/'],['seed','种子；籽','/siːd/'],['pull','拔出；抽出','/pʊl/'],
-      ['stem','（花草的）茎；（花或叶的）梗，柄','/stem/'],['root','根；根茎','/ruːt/'],['lotus','莲属植物','/ˈləʊtəs/'],
-      ['lake','湖；湖泊','/leɪk/'],['world','世界；地球；天下','/wɜːld/'],['round','圆形的；环形的；球形的','/raʊnd/'],
-      ['different','不同的；有区别的；有差异的','/ˈdɪfrənt/'],['way','方法；手段；途径；方式','/weɪ/']
+      ['hungry','感到饿的','/ˈhʌŋɡri/','I am hungry. Let\'s have lunch.','我饿了，我们吃午饭吧。'],['beef','牛肉','/biːf/','I\'d like some beef noodles.','我想要牛肉面。'],['ice cream','（一份）冰激凌','/ˌaɪs ˈkriːm/','The ice cream is cold and sweet.','冰激凌又冷又甜。'],
+      ['little','少许；一点','/ˈlɪtl/','There is a little milk in the cup.','杯里有一点牛奶。'],['dumpling','饺子；汤圆','/ˈdʌmplɪŋ/','We eat dumplings at the Spring Festival.','我们春节吃饺子。'],['tea','茶叶；茶；茶水','/tiː/','My grandpa likes green tea.','我爷爷喜欢绿茶。'],
+      ['hamburger','汉堡包；汉堡牛肉饼','/ˈhæmbɜːɡə(r)/','He eats a hamburger for lunch.','他午饭吃汉堡包。'],['Mrs','（用于女子的姓氏或姓名前）太太，夫人','/ˈmɪsɪz/','Mrs Li is our English teacher.','李太太是我们的英语老师。'],['coconut','椰子','/ˈkəʊkənʌt/','The coconut is from Hainan.','这个椰子来自海南。'],
+      ['interesting','有趣的；有吸引力的','/ˈɪntrəstɪŋ/','The story is very interesting.','这个故事很有趣。'],['seed','种子；籽','/siːd/','A seed can grow into a plant.','种子能长成植物。'],['pull','拔出；抽出','/pʊl/','Pull the rope hard.','用力拉绳子。'],
+      ['stem','（花草的）茎；（花或叶的）梗，柄','/stem/','The stem is long and green.','茎又长又绿。'],['root','根；根茎','/ruːt/','The root is under the ground.','根在地底下。'],['lotus','莲属植物','/ˈləʊtəs/','The lotus is in the lake.','荷花在湖里。'],
+      ['lake','湖；湖泊','/leɪk/','We boat on the lake.','我们在湖上划船。'],['world','世界；地球；天下','/wɜːld/','Chinese food is famous in the world.','中国菜世界闻名。'],['round','圆形的；环形的；球形的','/raʊnd/','The moon is round tonight.','今晚月亮是圆的。'],
+      ['different','不同的；有区别的；有差异的','/ˈdɪfrənt/','People eat different food in different places.','不同地方的人吃不同的食物。'],['way','方法；手段；途径；方式','/weɪ/','This is a good way to learn English.','这是学英语的好方法。']
     ]},
     {id:'g5a-u6',title:'Unit 6',cn:'第六单元',words:[
-      ['river','河；江','/ˈrɪvə(r)/'],['nature','自然界；大自然','/ˈneɪtʃə(r)/'],['waterfall','瀑布','/ˈwɔːtəfɔːl/'],
-      ['forest','森林；林区','/ˈfɒrɪst/'],['famous','著名的；出名的','/ˈfeɪməs/'],['mountain','高山；山岳','/ˈmaʊntən/'],
-      ['wind','风；气流','/wɪnd/'],['trip','（尤指短程往返的）旅行，旅游，出行','/trɪp/'],['dangerous','有危险的；不安全的','/ˈdeɪndʒərəs/'],
-      ['heavy','程度大的；严重的','/ˈhevi/'],['hotel','旅馆；旅社','/həʊˈtel/'],['close','关；关闭；闭上','/kləʊz/'],
-      ['umbrella','伞；雨伞','/ʌmˈbrelə/'],['raincoat','雨衣','/ˈreɪnkəʊt/'],['worry','担心；担忧；发愁','/ˈwʌri/'],
-      ['fine','晴朗的','/faɪn/'],['fog','雾','/fɒɡ/'],['flood','洪水；水灾','/flʌd/'],
-      ['fire','火；火灾','/ˈfaɪə(r)/'],['know','知道；了解','/nəʊ/'],['before','在……之前','/bɪˈfɔː(r)/'],
-      ['go hiking','徒步旅行','/ɡəʊ ˈhaɪkɪŋ/'],['bring','带……到某处；带来；取来','/brɪŋ/']
+      ['river','河；江','/ˈrɪvə(r)/','The river is long and clean.','这条河又长又干净。'],['nature','自然界；大自然','/ˈneɪtʃə(r)/','We should love nature.','我们应该热爱大自然。'],['waterfall','瀑布','/ˈwɔːtəfɔːl/','The waterfall is very high.','瀑布很高。'],
+      ['forest','森林；林区','/ˈfɒrɪst/','Many trees grow in the forest.','森林里长着许多树。'],['famous','著名的；出名的','/ˈfeɪməs/','The mountain is famous in China.','这座山在中国很有名。'],['mountain','高山；山岳','/ˈmaʊntən/','We climb the mountain on Sunday.','我们星期天爬山。'],
+      ['wind','风；气流','/wɪnd/','The wind is strong today.','今天风很大。'],['trip','（尤指短程往返的）旅行，旅游，出行','/trɪp/','We have a trip to the forest.','我们去森林旅行。'],['dangerous','有危险的；不安全的','/ˈdeɪndʒərəs/','It is dangerous to swim in the river.','在河里游泳很危险。'],
+      ['heavy','程度大的；严重的','/ˈhevi/','There is heavy rain tonight.','今晚有大雨。'],['hotel','旅馆；旅社','/həʊˈtel/','We stay in a hotel near the lake.','我们住在湖边的旅馆。'],['close','关；关闭；闭上','/kləʊz/','Please close the window.','请关窗。'],
+      ['umbrella','伞；雨伞','/ʌmˈbrelə/','Take an umbrella with you.','带把伞。'],['raincoat','雨衣','/ˈreɪnkəʊt/','He wears a raincoat in the rain.','他下雨时穿雨衣。'],['worry','担心；担忧；发愁','/ˈwʌri/','Do not worry. We are safe.','别担心，我们很安全。'],
+      ['fine','晴朗的','/faɪn/','It is fine today.','今天天气晴朗。'],['fog','雾','/fɒɡ/','The fog is thick in the morning.','早晨雾很大。'],['flood','洪水；水灾','/flʌd/','The flood is dangerous.','洪水很危险。'],
+      ['fire','火；火灾','/ˈfaɪə(r)/','Do not play with fire.','不要玩火。'],['know','知道；了解','/nəʊ/','Do you know the way to the hotel?','你知道去旅馆的路吗？'],['before','在……之前','/bɪˈfɔː(r)/','Check the weather before you go hiking.','徒步前查一下天气。'],
+      ['go hiking','徒步旅行','/ɡəʊ ˈhaɪkɪŋ/','Let\'s go hiking this weekend.','这个周末我们去徒步吧。'],['bring','带……到某处；带来；取来','/brɪŋ/','Bring some water and food.','带些水和食物。']
     ]}
   ]
 };
@@ -300,54 +306,54 @@ var G4A={
   name:'人教PEP · 四年级上册',
   units:[
     {id:'g4a-u1',title:'Unit 1',cn:'第一单元',words:[
-      ['PE','体育（课）','/ˌpiː ˈiː/'],['job','工作；职业','/dʒɒb/'],['doctor','医生','/ˈdɒktə(r)/'],
-      ['farmer','农场主；农民','/ˈfɑːmə(r)/'],['nurse','护士','/nɜːs/'],['office worker','公司职员','/ˈɒfɪs ˈwɜːkə(r)/'],
-      ['factory worker','工厂工人','/ˈfæktri ˈwɜːkə(r)/'],['busy','忙碌的','/ˈbɪzi/'],['tired','疲倦的','/ˈtaɪəd/'],
-      ['chore','家庭杂务','/tʃɔː(r)/'],['cook','烹饪；煮','/kʊk/'],['clean','打扫；干净的','/kliːn/'],
-      ['room','房间','/ruːm/'],['look after','照顾','/lʊk ˈɑːftə(r)/'],['sweep','扫','/swiːp/'],
-      ['floor','地板；地面','/flɔː(r)/'],['together','在一起；共同','/təˈɡeðə(r)/'],['people','人；人们','/ˈpiːpl/'],
-      ['child','儿童；小孩（复数 children /ˈtʃɪldrən/）','/tʃaɪld/']
+      ['PE','体育（课）','/ˌpiː ˈiː/','We have PE on Monday.','我们星期一有体育课。'],['job','工作；职业','/dʒɒb/','My mother is a nurse.','我妈妈是护士。'],['doctor','医生','/ˈdɒktə(r)/','The doctor helps sick people.','医生帮助生病的人。'],
+      ['farmer','农场主；农民','/ˈfɑːmə(r)/','The farmer works on the farm.','农民在农场工作。'],['nurse','护士','/nɜːs/','The nurse is very kind.','这位护士很友善。'],['office worker','公司职员','/ˈɒfɪs ˈwɜːkə(r)/','He is an office worker.','他是公司职员。'],
+      ['factory worker','工厂工人','/ˈfæktri ˈwɜːkə(r)/','The factory worker makes toys.','工厂工人做玩具。'],['busy','忙碌的','/ˈbɪzi/','My father is busy today.','我爸爸今天很忙。'],['tired','疲倦的','/ˈtaɪəd/','I am tired after school.','放学后我很累。'],
+      ['chore','家庭杂务','/tʃɔː(r)/','I do a chore at home.','我在家做一件家务。'],['cook','烹饪；煮','/kʊk/','My mother can cook well.','我妈妈做饭很好吃。'],['clean','打扫；干净的','/kliːn/','We clean the classroom together.','我们一起打扫教室。'],
+      ['room','房间','/ruːm/','My room is clean and tidy.','我的房间干净整洁。'],['look after','照顾','/lʊk ˈɑːftə(r)/','She looks after her little brother.','她照顾她弟弟。'],['sweep','扫','/swiːp/','I sweep the floor after dinner.','晚饭后我扫地。'],
+      ['floor','地板；地面','/flɔː(r)/','The floor is very clean.','地板很干净。'],['together','在一起；共同','/təˈɡeðə(r)/','We do chores together.','我们一起做家务。'],['people','人；人们','/ˈpiːpl/','Many people work at night.','许多人在夜里工作。'],
+      ['child','儿童；小孩（复数 children /ˈtʃɪldrən/）','/tʃaɪld/','The child is only six.','这个孩子才六岁。']
     ]},
     {id:'g4a-u2',title:'Unit 2',cn:'第二单元',words:[
-      ['his','他的','/hɪz/'],['strong','强壮的','/strɒŋ/'],['hair','头发','/heə(r)/'],
-      ['also','也','/ˈɔːlsəʊ/'],['kind','友好的','/kaɪnd/'],['quiet','文静的','/ˈkwaɪət/'],
-      ['best','最好的','/best/'],['read','阅读','/riːd/'],['Chinese','中文；中国人；中国的','/ˌtʃaɪˈniːz/'],
-      ['play','玩耍','/pleɪ/'],['game','游戏','/ɡeɪm/'],['football','足球运动','/ˈfʊtbɔːl/'],
-      ['basketball','篮球运动','/ˈbɑːskɪtbɔːl/'],['always','总是','/ˈɔːlweɪz/']
+      ['his','他的','/hɪz/','His hair is short and black.','他的头发又短又黑。'],['strong','强壮的','/strɒŋ/','My brother is tall and strong.','我哥哥又高又壮。'],['hair','头发','/heə(r)/','She has long hair.','她留着长发。'],
+      ['also','也','/ˈɔːlsəʊ/','He can also play the piano.','他也会弹钢琴。'],['kind','友好的','/kaɪnd/','Our teacher is kind to us.','我们老师对我们很和善。'],['quiet','文静的','/ˈkwaɪət/','The boy is quiet in class.','这个男孩在课上很安静。'],
+      ['best','最好的','/best/','She is my best friend.','她是我最好的朋友。'],['read','阅读','/riːd/','I like to read storybooks.','我喜欢读故事书。'],['Chinese','中文；中国人；中国的','/ˌtʃaɪˈniːz/','We have a Chinese lesson today.','我们今天有语文课。'],
+      ['play','玩耍','/pleɪ/','Let\'s play a game together.','我们一起玩个游戏吧。'],['game','游戏','/ɡeɪm/','The game is very fun.','这个游戏很好玩。'],['football','足球运动','/ˈfʊtbɔːl/','He plays football after school.','他放学后踢足球。'],
+      ['basketball','篮球运动','/ˈbɑːskɪtbɔːl/','They play basketball on the playground.','他们在操场上打篮球。'],['always','总是','/ˈɔːlweɪz/','She always helps others.','她总是帮助别人。']
     ]},
     {id:'g4a-u3',title:'Unit 3',cn:'第三单元',words:[
-      ['afternoon','下午','/ˌɑːftəˈnuːn/'],['there','（表示存在或发生）；在那里','/ðeə(r)/'],['playground','游乐场；操场','/ˈpleɪɡraʊnd/'],
-      ['park','公园','/pɑːk/'],['over','在……的远端（或对面）','/ˈəʊvə(r)/'],['hospital','医院','/ˈhɒspɪtl/'],
-      ['shop','商店','/ʃɒp/'],['toilet','厕所；卫生间','/ˈtɔɪlət/'],['bus stop','公共汽车站','/bʌs stɒp/'],
-      ['library','图书馆','/ˈlaɪbrəri/'],['sport','体育运动','/spɔːt/'],['walk','散步；行走','/wɔːk/'],
-      ['community','社区','/kəˈmjuːnəti/'],['favourite','最喜欢的','/ˈfeɪvərɪt/'],['place','地方；场所','/pleɪs/'],
-      ['photo','照片','/ˈfəʊtəʊ/'],['story','故事','/ˈstɔːri/'],['buy','购买','/baɪ/']
+      ['afternoon','下午','/ˌɑːftəˈnuːn/','We play games in the afternoon.','我们下午玩游戏。'],['there','（表示存在或发生）；在那里','/ðeə(r)/','There is a park near my home.','我家附近有个公园。'],['playground','游乐场；操场','/ˈpleɪɡraʊnd/','The children run on the playground.','孩子们在操场上跑。'],
+      ['park','公园','/pɑːk/','Let\'s walk in the park.','我们去公园散步吧。'],['over','在……的远端（或对面）','/ˈəʊvə(r)/','The shop is over there.','商店在那边。'],['hospital','医院','/ˈhɒspɪtl/','The hospital is next to the park.','医院在公园旁边。'],
+      ['shop','商店','/ʃɒp/','I buy some milk in the shop.','我在商店买牛奶。'],['toilet','厕所；卫生间','/ˈtɔɪlət/','Where is the toilet?','厕所在哪里？'],['bus stop','公共汽车站','/bʌs stɒp/','I wait at the bus stop.','我在公交站等车。'],
+      ['library','图书馆','/ˈlaɪbrəri/','We read books in the library.','我们在图书馆看书。'],['sport','体育运动','/spɔːt/','My favourite sport is swimming.','我最喜欢的运动是游泳。'],['walk','散步；行走','/wɔːk/','I walk to school every day.','我每天走路去学校。'],
+      ['community','社区','/kəˈmjuːnəti/','Our community is clean and safe.','我们社区干净又安全。'],['favourite','最喜欢的','/ˈfeɪvərɪt/','This is my favourite place.','这是我最喜欢的地方。'],['place','地方；场所','/pleɪs/','It is a good place to play.','这是个玩的好地方。'],
+      ['photo','照片','/ˈfəʊtəʊ/','I take a photo of the park.','我拍了一张公园的照片。'],['story','故事','/ˈstɔːri/','Grandma tells me a story.','奶奶给我讲故事。'],['buy','购买','/baɪ/','I want to buy a book.','我想买一本书。']
     ]},
     {id:'g4a-u4',title:'Unit 4',cn:'第四单元',words:[
-      ['firefighter','消防队员','/ˈfaɪəfaɪtə(r)/'],['why','为什么','/waɪ/'],['driver','司机','/ˈdraɪvə(r)/'],
-      ['cleaner','清洁工','/ˈkliːnə(r)/'],['cook','厨师','/kʊk/'],['delivery worker','快递员','/dɪˈlɪvəri ˈwɜːkə(r)/'],
-      ['police officer','警察；警员','/pəˈliːs ˈɒfɪsə(r)/'],['a lot of','大量；许多','/ə lɒt ɒv/'],['now','现在','/naʊ/'],
-      ['make the bed','铺床','/meɪk ðə bed/'],['old','过去的；年纪大的；老的','/əʊld/'],['tell','讲述；告诉','/tel/'],
-      ['everyone','每人','/ˈevriwʌn/'],['Ms','（用于女子的姓氏或姓名前，不指明婚否）女士','/mɪz/']
+      ['firefighter','消防队员','/ˈfaɪəfaɪtə(r)/','The firefighter is brave.','消防员很勇敢。'],['why','为什么','/waɪ/','Why are you late?','你为什么迟到？'],['driver','司机','/ˈdraɪvə(r)/','The bus driver works hard.','公交车司机工作很努力。'],
+      ['cleaner','清洁工','/ˈkliːnə(r)/','The cleaner keeps the street clean.','清洁工保持街道清洁。'],['cook','厨师','/kʊk/','My uncle is a cook.','我叔叔是厨师。'],['delivery worker','快递员','/dɪˈlɪvəri ˈwɜːkə(r)/','The delivery worker brings me a box.','快递员给我送来一个箱子。'],
+      ['police officer','警察；警员','/pəˈliːs ˈɒfɪsə(r)/','The police officer helps people.','警察帮助人们。'],['a lot of','大量；许多','/ə lɒt ɒv/','There are a lot of cars on the road.','路上有很多车。'],['now','现在','/naʊ/','I am doing my homework now.','我现在在做作业。'],
+      ['make the bed','铺床','/meɪk ðə bed/','I make the bed every morning.','我每天早上铺床。'],['old','过去的；年纪大的；老的','/əʊld/','My grandfather is old but strong.','我爷爷年纪大了但很强壮。'],['tell','讲述；告诉','/tel/','Please tell me a story.','请给我讲个故事。'],
+      ['everyone','每人','/ˈevriwʌn/','Everyone is here today.','今天大家都在。'],['Ms','（用于女子的姓氏或姓名前，不指明婚否）女士','/mɪz/','Ms Wang is our new teacher.','王女士是我们的新老师。']
     ]},
     {id:'g4a-u5',title:'Unit 5',cn:'第五单元',words:[
-      ['speak','说话；发言','/spiːk/'],['weather','天气','/ˈweðə(r)/'],['sunny','阳光充足的','/ˈsʌni/'],
-      ['hot','热的','/hɒt/'],['bad','令人不快的；坏的','/bæd/'],['cold','冷的','/kəʊld/'],
-      ['windy','多风的','/ˈwɪndi/'],['cloudy','多云的','/ˈklaʊdi/'],['rainy','阴雨的','/ˈreɪni/'],
-      ['snowy','多雪的','/ˈsnəʊi/'],['cool','凉爽的','/kuːl/'],['warm','温暖的','/wɔːm/'],
-      ['tomorrow','在明天','/təˈmɒrəʊ/'],['rain','下雨；雨','/reɪn/'],['closed','关闭的','/kləʊzd/'],
-      ['film','电影','/fɪlm/'],['idea','想法；主意','/aɪˈdɪə/'],['fly','操纵（飞行器等）；飞','/flaɪ/'],
-      ['kite','风筝','/kaɪt/'],['snowman','雪人','/ˈsnəʊmæn/'],['fun','享乐；乐趣','/fʌn/'],
-      ['their','他们的；她们的；它们的','/ðeə(r)/'],['swim','游泳','/swɪm/'],['Sydney','悉尼','/ˈsɪdni/']
+      ['speak','说话；发言','/spiːk/','May I speak to Tom?','我可以和汤姆说话吗？'],['weather','天气','/ˈweðə(r)/','The weather is good today.','今天天气很好。'],['sunny','阳光充足的','/ˈsʌni/','It is sunny and warm.','天气晴朗温暖。'],
+      ['hot','热的','/hɒt/','It is hot in summer.','夏天很热。'],['bad','令人不快的；坏的','/bæd/','The weather is bad today.','今天天气不好。'],['cold','冷的','/kəʊld/','It is cold in winter.','冬天很冷。'],
+      ['windy','多风的','/ˈwɪndi/','It is windy outside.','外面刮风。'],['cloudy','多云的','/ˈklaʊdi/','It is cloudy this morning.','今天早上多云。'],['rainy','阴雨的','/ˈreɪni/','It is a rainy day.','这是个下雨天。'],
+      ['snowy','多雪的','/ˈsnəʊi/','It is snowy in Harbin.','哈尔滨下雪。'],['cool','凉爽的','/kuːl/','Autumn is cool and nice.','秋天凉爽宜人。'],['warm','温暖的','/wɔːm/','The spring day is warm.','春天很温暖。'],
+      ['tomorrow','在明天','/təˈmɒrəʊ/','It will be sunny tomorrow.','明天会是晴天。'],['rain','下雨；雨','/reɪn/','It is going to rain.','要下雨了。'],['closed','关闭的','/kləʊzd/','The shop is closed today.','商店今天关门。'],
+      ['film','电影','/fɪlm/','We watch a film in the evening.','我们晚上看电影。'],['idea','想法；主意','/aɪˈdɪə/','That\'s a good idea!','好主意！'],['fly','操纵（飞行器等）；飞','/flaɪ/','Let\'s fly a kite in the park.','我们去公园放风筝吧。'],
+      ['kite','风筝','/kaɪt/','The kite is high in the sky.','风筝在天上飞得很高。'],['snowman','雪人','/ˈsnəʊmæn/','We make a snowman in winter.','我们冬天堆雪人。'],['fun','享乐；乐趣','/fʌn/','It is fun to play in the snow.','在雪里玩很有趣。'],
+      ['their','他们的；她们的；它们的','/ðeə(r)/','Their kite is red.','他们的风筝是红色的。'],['swim','游泳','/swɪm/','We swim in summer.','我们夏天游泳。'],['Sydney','悉尼','/ˈsɪdni/','It is warm in Sydney.','悉尼很暖和。']
     ]},
     {id:'g4a-u6',title:'Unit 6',cn:'第六单元',words:[
-      ['whose','谁的','/huːz/'],['sweater','毛衣','/ˈswetə(r)/'],['sock','短袜','/sɒk/'],
-      ['mine','我的','/maɪn/'],['wear','穿；戴','/weə(r)/'],['shirt','衬衫','/ʃɜːt/'],
-      ['coat','大衣；外套','/kəʊt/'],['dress','连衣裙','/dres/'],['which','哪一个；哪些','/wɪtʃ/'],
-      ['season','季节','/ˈsiːzn/'],['winter','冬天','/ˈwɪntə(r)/'],['snow','下雪；雪','/snəʊ/'],
-      ['get together','聚会','/ɡet təˈɡeðə(r)/'],['spring','春天','/sprɪŋ/'],['summer','夏天','/ˈsʌmə(r)/'],
-      ['autumn','秋天','/ˈɔːtəm/'],['T-shirt','T恤衫','/ˈtiːʃɜːt/'],['fall','落下','/fɔːl/'],
-      ['leaf','叶（复数 leaves /liːvz/）','/liːf/'],['glove','手套','/ɡlʌv/'],['then','然后；那时','/ðen/']
+      ['whose','谁的','/huːz/','Whose sweater is this?','这是谁的毛衣？'],['sweater','毛衣','/ˈswetə(r)/','This sweater is warm.','这件毛衣很暖和。'],['sock','短袜','/sɒk/','I can\'t find my sock.','我找不到我的袜子。'],
+      ['mine','我的','/maɪn/','The red coat is mine.','那件红大衣是我的。'],['wear','穿；戴','/weə(r)/','She wears a new dress.','她穿着一条新连衣裙。'],['shirt','衬衫','/ʃɜːt/','My shirt is white.','我的衬衫是白色的。'],
+      ['coat','大衣；外套','/kəʊt/','Put on your coat. It is cold.','穿上外套，天冷。'],['dress','连衣裙','/dres/','The dress is beautiful.','这条连衣裙很漂亮。'],['which','哪一个；哪些','/wɪtʃ/','Which season do you like best?','你最喜欢哪个季节？'],
+      ['season','季节','/ˈsiːzn/','There are four seasons in a year.','一年有四个季节。'],['winter','冬天','/ˈwɪntə(r)/','Winter is cold and snowy.','冬天寒冷多雪。'],['snow','下雪；雪','/snəʊ/','Children play in the snow.','孩子们在雪里玩。'],
+      ['get together','聚会','/ɡet təˈɡeðə(r)/','We get together at Spring Festival.','我们春节团聚。'],['spring','春天','/sprɪŋ/','Flowers come out in spring.','春天花开。'],['summer','夏天','/ˈsʌmə(r)/','Summer is hot.','夏天很热。'],
+      ['autumn','秋天','/ˈɔːtəm/','Leaves turn yellow in autumn.','秋天树叶变黄。'],['T-shirt','T恤衫','/ˈtiːʃɜːt/','He wears a T-shirt in summer.','他夏天穿T恤。'],['fall','落下','/fɔːl/','Leaves fall from the trees.','叶子从树上落下。'],
+      ['leaf','叶（复数 leaves /liːvz/）','/liːf/','One leaf is on the ground.','一片叶子在地上。'],['glove','手套','/ɡlʌv/','I wear gloves in winter.','我冬天戴手套。'],['then','然后；那时','/ðen/','We have dinner, then watch TV.','我们吃晚饭，然后看电视。']
     ]}
   ]
 };
@@ -404,7 +410,7 @@ function switchBank(id){
 function allWords(){
   var out=[];
   lib().units.forEach(function(u){
-    u.words.forEach(function(w){ out.push({w:w[0],cn:w[1],ipa:w[2]||'',uid:u.id,unit:u.title,ucn:u.cn}); });
+    u.words.forEach(function(w){ out.push({w:w[0],cn:w[1],ipa:w[2]||'',ex:w[3]||'',excn:w[4]||'',uid:u.id,unit:u.title,ucn:u.cn}); });
   });
   return out;
 }
@@ -643,8 +649,10 @@ function vCard(){
       '<div class="face back">'+
         '<div class="word small">'+esc(it.w)+'</div>'+(it.ipa?'<div class="ipa">'+esc(it.ipa)+'</div>':'')+
         '<div class="cn">'+esc(it.cn)+'</div>'+
+        (it.ex?'<div class="exbox"><div class="ex">'+esc(it.ex)+'</div><div class="excn">'+esc(it.excn||'')+'</div>'+
+        '<button class="ex-speaker" id="exspk" title="朗读例句">🔊 例句</button></div>':'')+
         '<div class="hint">'+esc(it.unit)+'</div>'+
-        '<button class="btn" id="goFollow" style="margin-top:12px;background:rgba(255,255,255,.16);color:#fff">🎤 跟读这个词</button>'+
+        '<button class="btn primary" id="goFollow" style="margin-top:10px">🎤 跟读这个词</button>'+
       '</div>'+
     '</div>'+
   '</div>'+
@@ -654,13 +662,14 @@ function vCard(){
     '<button class="btn ok" data-q="2">😀 记住了</button>'+
   '</div>'+
   '<div style="margin-top:12px;display:flex;gap:8px">'+
-    '<button class="btn ghost" id="prev" style="flex:0 0 92px" '+(sess.i>0?'':'disabled')+'>← 上一个</button>'+
+    '<button class="btn ghost" id="prev" style="flex:0 0 auto;white-space:nowrap" '+(sess.i>0?'':'disabled')+'>← 上一个</button>'+
     '<button class="btn ghost" id="reveal" style="flex:1;'+(sess.flip?'display:none':'')+'">看中文</button>'+
     '<button class="btn ghost" id="skip" style="flex:0 0 76px">跳过</button>'+
   '</div>';
 
   return {html:html, mount:function(){
     if(S.settings.autoSpeak && unlocked!==false) setTimeout(function(){ speak(it.w); },250);
+    if($('#exspk')) $('#exspk').onclick=function(e){ e.stopPropagation(); speak(it.ex); };
     $('#spk').onclick=function(e){ e.stopPropagation(); speak(it.w); };
     $('#flash').onclick=function(){
       sess.flip=true;
@@ -1536,7 +1545,7 @@ function vMe(){
       b.onclick=function(){ if(S.custom){ toast('请先恢复内置词库再切换'); return; } switchBank(b.getAttribute('data-b')); };
     });   $('#dn').querySelectorAll('.chip').forEach(function(b){ b.onclick=function(){ S.settings.dailyNew=parseInt(b.getAttribute('data-v'),10); save(); go('me'); }; });
     $('#rate').querySelectorAll('.chip').forEach(function(b){ b.onclick=function(){ S.settings.rate=parseFloat(b.getAttribute('data-v')); save(); go('me'); }; });
-    $('#testVoice').onclick=function(){ speak('Hello! Let us learn English together.'); };
+    $('#testVoice').onclick=function(){ speak('Hello! Let\'s learn English together.'); };
     if($('#voice')) $('#voice').onchange=function(){ S.settings.voice=this.value; save(); speak('Hello!'); };
     if($('#auto')) $('#auto').onchange=function(){ S.settings.autoSpeak=this.checked; save(); };
     $('#units').querySelectorAll('.chip').forEach(function(b){
@@ -1564,8 +1573,10 @@ function vMe(){
         if(m){ units.push({id:'custom-'+(units.length+1),title:L,cn:L,words:[]}); return; }
         var parts=L.split(/[,，\t]+/);
         if(parts.length<2){ parts=L.split(/\s+/); if(parts.length<2) return; }
-        var w=parts.shift().trim(), cn=parts.join(' ').trim();
-        if(w&&cn) units[units.length-1].words.push([w,cn]);
+        var w=parts.shift().trim();
+        if(parts.length>=4){ var cn=parts.shift().trim(), ipa=parts.shift().trim(), ex=parts.shift().trim(), exz=parts.join(' ').trim();
+          units[units.length-1].words.push([w,cn,ipa,ex,exz]); }
+        else { var cn2=parts.join(' ').trim(); if(w&&cn2) units[units.length-1].words.push([w,cn2]); }
       });
       units=units.filter(function(u){ return u.words.length; });
       var total=units.reduce(function(a,u){return a+u.words.length;},0);
